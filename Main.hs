@@ -1,27 +1,18 @@
 module Main where
-fibonacci :: Integer -> Integer
-fibonacci x 
-  | 0 == x = 1
-  | 1 == x = 1
-  | otherwise = fibonacci (x-1) + fibonacci(x-2)
- 
-find :: [Integer] -> Integer -> Bool
-find [] _ = False
-find  (f : fs ) x = case compare f x of
-  GT -> False
-  LT -> find fs x
-  EQ -> True
+import Data.Char
+import Data.Maybe
+import BST
 
-findInFib :: Integer -> Bool
-findInFib = find $ map fibonacci [0..]
+values = [5,3,8,7,5,2,4,76,54,23,09,67]
+mytree = foldl insert ( Leaf . head $ values ) ( tail values )
 
 main :: IO()
-main = do
-  putStrLn "Enter number you want to test for fibonacci:"
-  val <-  (findInFib . read) <$> getLine
-  if True == val then
-    putStrLn "The value occurs in the fibonacci series"
-  else putStrLn "This is not a fibonacci number"
+main = print . tolist $ mytree
 
-  -- warp, qfpl, applied-fp-course
+--  putStrLn "Enter number you want to test for fibonacci:"
+--  val <-  (findInFib . read) <$> getLine
+--  if val then
+--    putStrLn "The value occurs in the fibonacci series"
+--  else putStrLn "This is not a fibonacci number"
+ -- warp, qfpl, applied-fp-course
   -- hayoo, local-hoogle
