@@ -2,12 +2,16 @@ module Main where
 import Data.Char
 import Data.Maybe
 import BST
+import Heap
 
-values = [5,3,8,7,5,2,4,76,54,23,09,67]
 mytree = foldl insert ( Leaf . head $ values ) ( tail values )
 
+values = [8,3,5,7,5,2,4,76,54,23,09,67]
+
+heap = Heap values :: BinHeap Int
+
 main :: IO()
-main = print . tolist $ mytree
+main = print $ makeheap values
 
 --  putStrLn "Enter number you want to test for fibonacci:"
 --  val <-  (findInFib . read) <$> getLine
