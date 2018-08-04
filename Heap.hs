@@ -51,12 +51,10 @@ heapify ( Heap xs ) i = case children ( Heap xs ) i of
                                        heapify ( swap ( Heap xs ) j i ) i
                                        else
                                        heapify ( Heap xs ) ( ( i-1 ) `div` 2 )
-                          [( u, j ), ( v, k  )] -> if u < ( xs !! i )  then
-                                       heapify ( swap ( Heap xs ) i j ) i
-                                       else if   v < ( xs !! i ) then
-                                       heapify ( swap ( Heap xs ) i k ) i
-                                       else
-                                       heapify ( Heap xs ) ( ( i-1 ) `div` 2 )
+                          [( u, j ), ( v, k  )] 
+                             | u < ( xs !! i ) ->  heapify ( swap ( Heap xs ) i j ) i
+                             | v < ( xs !! i ) ->  heapify ( swap ( Heap xs ) i k ) i
+                             | otherwise -> heapify ( Heap xs ) ( ( i-1 ) `div` 2 )
 
 addtoheap :: Ord a => a  -> BinHeap a -> BinHeap a
 addtoheap a ( Heap [] ) = Heap [a]
