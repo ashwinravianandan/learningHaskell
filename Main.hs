@@ -6,7 +6,7 @@ import Heap
 
 mytree = foldl insert ( Leaf . head $ values ) ( tail values )
 
-values = [8,3,5,7,5,2,4,76,54,23,09,67]
+values = [8,3,5,7,5,2,4,76,54,23,09,67,25,223,23,36, 3,24,23,2,2,5,2,25]
 
 heap = Heap values :: BinHeap Int
 
