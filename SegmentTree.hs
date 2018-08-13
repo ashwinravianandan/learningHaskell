@@ -27,11 +27,5 @@ insert x (Node a l r)
                   l'' = case l of
                           Node l' _ _ -> l'
 
-populate :: (Monoid a, Eq a) => [a] -> SegmentTree a
-populate [x] = Leaf x
-populate (x:xs) = insert x (populate xs)
-
-tree = populate $ map Sum . reverse $ [1, 2, 3, 4]
-
---main :: IO ()
---main = print tree
+construct :: (Monoid a, Eq a) => [a] -> SegmentTree a
+construct xs = foldr insert (Leaf . head $ xs) (reverse . tail $ xs)
