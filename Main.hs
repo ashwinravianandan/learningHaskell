@@ -1,22 +1,8 @@
 module Main where
-import Data.Char
-import Data.Maybe
-import BST
-import Heap
+import Data.Monoid
+import SegmentTree
 
-mytree = foldl insert ( Leaf . head $ values ) ( tail values )
-
-values = [8,3,5,7,5,2,4,76,54,23,09,67,25,223,23,36, 3,24,23,2,2,5,2,25]
-
-heap = Heap values :: BinHeap Int
+segtree = construct (map Sum [1,2,3,4,5,6,7,8])
 
 main :: IO()
-main = print $ makeheap values
-
---  putStrLn "Enter number you want to test for fibonacci:"
---  val <-  (findInFib . read) <$> getLine
---  if val then
---    putStrLn "The value occurs in the fibonacci series"
---  else putStrLn "This is not a fibonacci number"
- -- warp, qfpl, applied-fp-course
-  -- hayoo, local-hoogle
+main = print $ value 7 segtree

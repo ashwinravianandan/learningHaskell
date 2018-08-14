@@ -1,4 +1,4 @@
-module Main where
+module SegmentTree where
 import Data.Monoid
 import Data.Foldable
 
@@ -29,3 +29,19 @@ insert x (Node a l r)
 
 construct :: (Monoid a, Eq a) => [a] -> SegmentTree a
 construct xs = foldr insert (Leaf . head $ xs) (reverse . tail $ xs)
+
+treelen :: SegmentTree a -> Int
+treelen (Leaf _) = 1
+treelen (PNode _ n) = treelen n
+treelen (Node _ l r) = treelen l + treelen r
+
+value :: Monoid a => Int -> SegmentTree a -> a
+value 1 (Leaf v) = v
+value n (Node a l r) = case compare n (treelen (Node a l r)) of
+                         EQ -> a
+                         LT -> case compare n halflen  of
+                           EQ ->  value n l
+                           LT -> value n l
+                           GT -> value halflen l <> value (n - halflen) r
+                        where halflen = treelen (Node a l r) `div` 2
+
